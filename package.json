@@ -1,6 +1,6 @@
 {
   "name": "getslacked",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Create slack bots or send slack messages easily.",
   "main": "src/index.js",
   "scripts": {
