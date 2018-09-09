@@ -1,4 +1,4 @@
-# slackutils
+# getslacked
 
 This is a simple nodejs library to create slack bots or send slack messages easily.
 Typical scenarios where once needs to send a message to a slack user or a channel can be done with

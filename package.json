@@ -1,10 +1,11 @@
 {
-  "name": "@chandu1310/slackutils",
-  "version": "1.0.1",
+  "name": "getslacked",
+  "version": "1.0.2",
   "description": "Create slack bots or send slack messages easily.",
   "main": "src/index.js",
   "scripts": {
-    "test": "npm run test"
+    "test": "npm run test",
+    "publish": "npm publish --access=public"
   },
   "repository": {
     "type": "git",
