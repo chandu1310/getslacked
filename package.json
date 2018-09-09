@@ -1,8 +1,8 @@
 {
-  "name": "slackutils",
-  "version": "1.0.0",
+  "name": "@chandu1310/slackutils",
+  "version": "1.0.1",
   "description": "Create slack bots or send slack messages easily.",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "npm run test"
   },
@@ -18,7 +18,7 @@
     "Node.js",
     "Javascript"
   ],
-  "author": "Chandra Shekar Chennamsetty",
+  "author": "Chandra Shekar Chennamsetty (02241a1210@gmail.com)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/chandu1310/slackutils/issues"
