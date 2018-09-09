@@ -1,15 +1,15 @@
 {
   "name": "getslacked",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "Create slack bots or send slack messages easily.",
   "main": "src/index.js",
   "scripts": {
     "test": "npm run test",
-    "publish": "npm publish --access=public"
+    "release": "npm publish"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chandu1310/slackutils.git"
+    "url": "git+https://github.com/chandu1310/getslacked"
   },
   "engines": {
     "node": ">=0.10.0"
@@ -22,9 +22,9 @@
   "author": "Chandra Shekar Chennamsetty (02241a1210@gmail.com)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/chandu1310/slackutils/issues"
+    "url": "https://github.com/chandu1310/getslacked/issues"
   },
-  "homepage": "https://github.com/chandu1310/slackutils#readme",
+  "homepage": "https://github.com/chandu1310/getslacked#readme",
   "dependencies": {
     "@slack/client": "^4.6.0"
   }
