@@ -26,6 +26,6 @@
   },
   "homepage": "https://github.com/chandu1310/getslacked#readme",
   "dependencies": {
-    "@slack/client": "^4.6.0"
+    "@slack/client": "5.0.1"
   }
 }
