@@ -1,7 +1,8 @@
 const { WebClient } = require('@slack/client');
 
 class SlackMessageDispatcher {
-  constructor(token){
+  constructor(token, logger){
+    this.logger = logger;
     this.token = token;
     this.channels = new Map();
 
@@ -13,8 +14,13 @@ class SlackMessageDispatcher {
          this.channels.set(c.id, c.name);
         }
       });
-      console.log(`SlackMessageDispatcher.constructor: Channels List\n`,this.channels);
+      this.log(`SlackMessageDispatcher.constructor: Channels List\n`,this.channels);
     });
+  }
+
+  log(...messages){
+    if(this.logger)
+      this.logger.log(messages);
   }
 
   getUser(id) {
@@ -45,7 +51,7 @@ class SlackMessageDispatcher {
   }
 
   sendTextToChannel(name, text){
-    console.debug(`SlackMessageDispatcher.sendTextToChannel: Request to send message to ${name}: ${text}`);
+    this.log(`SlackMessageDispatcher.sendTextToChannel: Request to send message to ${name}: ${text}`);
     const web = this.web;
     return this.getChannel(name).then(
       (id)=>{
@@ -54,7 +60,7 @@ class SlackMessageDispatcher {
           return true;
         })
         .catch((er)=>{
-          console.error('SlackMessageDispatcher.sendTextToChannel: Failed to send message.\nReason:', er);
+          this.log('SlackMessageDispatcher.sendTextToChannel: Failed to send message.\nReason:', er);
           return false;
         });    
       }

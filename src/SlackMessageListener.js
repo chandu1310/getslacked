@@ -3,7 +3,8 @@ const { RTMClient } = require('@slack/client');
 const SlackMessageDispatcher = require('./SlackMessageDispatcher');
 
 class SlackMessageListener {
-  constructor(token){
+  constructor(token, logger){
+    this.logger = logger;
     this.token = token;
     this.slackevents = new EventEmitter();
     this.slack = new SlackMessageDispatcher(this.token);
@@ -11,10 +12,10 @@ class SlackMessageListener {
     this.rtm = rtm;
     this.rtm.start();
     this.rtm.on('authenticated', (event) => {
-      console.debug(`SlackMessageListener.constructor: Authenticated for RTM Successfully. Logged in as ${event.self.name} of team ${event.team.name}`);
+      this.log(`SlackMessageListener.constructor: Authenticated for RTM Successfully. Logged in as ${event.self.name} of team ${event.team.name}`);
     });
     this.rtm.on('ready', () => {
-      console.debug(`SlackMessageListener.constructor: Ready to receive RTM.`);
+      this.log(`SlackMessageListener.constructor: Ready to receive RTM.`);
       this.rtm.on(`message`, (message) => {
         if(message.type==='message' && message.channel && message.user){
           this.getUser(message.user)
@@ -37,40 +38,45 @@ class SlackMessageListener {
     });
   }
 
+  log(...messages){
+    if(this.logger)
+      this.logger.log(messages);
+  }
+
   processMessage(message){
-    console.debug(`SlackMessageListener.processMessage: Processing incoming message.`);
+    this.log(`SlackMessageListener.processMessage: Processing incoming message.`);
     let eventName = `USER/${message.from.displayname.toUpperCase()}`;
     if(!message.channel.isDirect) {
       // For INDIRECT messages
       // eventName = `USER/${message.from.displayname.toUpperCase()}/CHANNEL/${message.channel.name.toUpperCase()}`;
-      // console.debug(`Sending event: ${eventName}`);
+      // this.log(`Sending event: ${eventName}`);
       // this.slackevents.emit(eventName, message);
 
       eventName = `CHANNEL/${message.channel.name.toUpperCase()}`;
-      // console.debug(`Sending event: ${eventName}`);  
+      // this.log(`Sending event: ${eventName}`);  
       this.slackevents.emit(eventName, message);
     } else {
       // For DIRECT messages
-      // console.debug(`Sending event: ${eventName}`);
+      // this.log(`Sending event: ${eventName}`);
       this.slackevents.emit(eventName, message);
     }
   }
 
   onMessageInChannel(channelname, callback){
     const topic = `CHANNEL/${channelname.toUpperCase()}`;
-    // console.debug(`Registering for ${topic}`);
+    // this.log(`Registering for ${topic}`);
     this.slackevents.on(topic, callback);
   }
 
   // onIndirectMessageFrom(sender, channelname, callback){
   //   const topic = `USER/${sender.toUpperCase()}/CHANNEL/${channelname.toUpperCase()}`;
-  //   // console.debug(`Registering for ${topic}`);
+  //   // this.log(`Registering for ${topic}`);
   //   this.slackevents.on(topic, callback);
   // }
 
   onDirectMessageFrom(sender, callback){
     const topic = `USER/${sender.toUpperCase()}`;
-    // console.debug(`Registering for ${topic}`);
+    // this.log(`Registering for ${topic}`);
     this.slackevents.on(topic, callback);
   }
 
