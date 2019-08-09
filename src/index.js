@@ -1,7 +1,9 @@
-import 'dotenv/config';
+"use strict";
 
-export const demo = () => {
-  const message = 'Welcome. This project was build with nodeneeds';
-  console.log(message);
-  return message;
-}
+const SlackMessageDispatcher = require('./SlackMessageDispatcher');
+const SlackMessageListerner = require('./SlackMessageListener');
+
+module.exports = {
+  SlackMessageDispatcher,
+  SlackMessageListerner
+};

@@ -1,7 +1,8 @@
-import { demo } from '../src/index';
+import Index from '../src/index';
 
 describe('index', () => {
-  it('returns welcome message when called', () => {
-    expect(demo()).to.equal('Welcome. This project was build with nodeneeds');
+  it('exports expected modules', () => {
+    expect(Index).to.have.property('SlackMessageDispatcher');
+    expect(Index).to.have.property('SlackMessageListerner');
   });
 })
