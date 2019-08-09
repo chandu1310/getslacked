@@ -1,0 +1,59 @@
+{
+  "name": "getslacked",
+  "version": "1.2.0",
+  "description": "Slack programming made easy",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chandu1310/getslacked"
+  },
+  "homepage": "https://github.com/chandu1310/getslacked#readme",
+  "bugs": {
+    "url": "https://github.com/chandu1310/getslacked/issues"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "main": "lib/index.js",
+  "scripts": {
+    "lint": "echo Checking for lint issues && ./node_modules/.bin/eslint --fix ./test ./src",
+    "test": "echo Running Tests && ./node_modules/mocha/bin/mocha --require @babel/register --reporter spec",
+    "test:coverage": "./node_modules/.bin/nyc --check-coverage --lines 95 --functions 95 --branches 95 --reporter=html yarn test",
+    "build": "yarn lint && yarn test && echo Building code && rm -rf lib && babel src --out-dir lib --source-maps inline",
+    "release": "np"
+  },
+  "keywords": [
+    "nodejs",
+    "npm",
+    "nodeneeds",
+    "nodeneeds-npm",
+    "javascript",
+    "es6",
+    "travisci",
+    "getslacked",
+    "slack"
+  ],
+  "author": "Chandra Shekar Chennamsetty (02241a1210@gmail.com)",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/register": "^7.4.4",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "eslint": "^6.0.0",
+    "eslint-config-eslint": "^5.0.1",
+    "mocha": "^6.1.4",
+    "np": "^5.0.3",
+    "nyc": "^14.1.1",
+    "sinon": "^7.3.2"
+  },
+  "dependencies": {
+    "@slack/client": "^5.0.2",
+    "axios": "^0.19.0",
+    "dotenv": "^8.0.0"
+  },
+  "np": {
+    "yarn": false
+  }
+}

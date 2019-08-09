@@ -1,0 +1,29 @@
+{
+    "env": {
+        "es6": true,
+        "node": true,
+        "mocha": true
+    },
+    "extends": "eslint:recommended",
+    "globals": {
+      "Atomics": "readonly",
+      "SharedArrayBuffer": "readonly",
+      "chai": true,
+      "expect": true,
+      "sandbox": true    
+    },
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "rules": {
+    },
+    "overrides": [
+      {
+        "files": ["*.spec.js", "*.spec.util.js"],
+        "rules": {
+          "no-unused-expressions": "off"
+        }
+      }
+    ]
+}
